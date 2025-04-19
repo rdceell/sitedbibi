@@ -63,8 +63,18 @@
     .photos img:hover {
       transform: scale(1.05);
     }
-    audio {
-      display: none;
+    .play-button {
+      margin-top: 30px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: white;
+      color: #222;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255,255,255,0.3);
     }
   </style>
 </head>
@@ -78,11 +88,31 @@
       <img src="img/foto2.JPG" alt="Foto 2">
       <img src="img/foto3.JPG" alt="Foto 3">
     </div>
+    <div class="play-button">
+      <button onclick="playAudio()">▶ Tocar música</button>
+      <p style="margin-top: 10px; font-size: 0.9em;">(Clique se a música não começar sozinha 🎵)</p>
+    </div>
   </div>
 
-  <audio autoplay loop>
+  <audio id="bgMusic" loop>
     <source src="music/musica.mp3" type="audio/mpeg">
     Seu navegador não suporta áudio.
   </audio>
+
+  <script>
+    function playAudio() {
+      const audio = document.getElementById('bgMusic');
+      audio.play();
+    }
+
+    // Tenta tocar automaticamente ao carregar
+    window.addEventListener('DOMContentLoaded', () => {
+      const audio = document.getElementById('bgMusic');
+      audio.play().catch(() => {
+        // autoplay foi bloqueado — botão visível para o usuário tocar
+        console.log('Autoplay bloqueado pelo navegador.');
+      });
+    });
+  </script>
 </body>
 </html>
