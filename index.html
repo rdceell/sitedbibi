@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saudades de Você</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      background-color: black;
+    }
+
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+      background-size: cover;
+      background-position: center;
+      filter: blur(12px) brightness(0.6);
+      transition: background-image 2s ease-in-out;
+    }
+
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .content h1 {
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .photos {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 20px;
+    }
+
+    .photos img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 3px solid white;
+      transition: transform 0.4s ease;
+    }
+
+    .photos img:hover {
+      transform: scale(1.1);
+    }
+
+    button#toggleMusic {
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      background: #ff7f7f;
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button#toggleMusic:hover {
+      background: #ff5252;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    @media (max-width: 768px) {
+      .photos {
+        flex-direction: column;
+      }
+
+      .photos img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background" id="background"></div>
+
+  <div class="content">
+    <h1>Saudades de Você bibi ❤️</h1>
+    <div class="photos">
+      <img src="img/foto1.jpg" alt="Foto 1" />
+      <img src="img/foto2.jpg" alt="Foto 2" />
+      <img src="img/foto3.jpg" alt="Foto 3" />
+    </div>
+    <button id="toggleMusic">⏸ Música</button>
+  </div>
+
+  <audio id="bgMusic" autoplay loop>
+    <source src="music/musica.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <script>
+    const backgrounds = [
+      'img/bg1.jpg',
+      'img/bg2.jpg',
+      'img/bg3.jpg'
+    ];
+
+    let current = 0;
+    const bg = document.getElementById('background');
+
+    function changeBackground() {
+      current = (current + 1) % backgrounds.length;
+      bg.style.backgroundImage = `url('${backgrounds[current]}')`;
+    }
+
+    bg.style.backgroundImage = `url('${backgrounds[current]}')`;
+    setInterval(changeBackground, 7000);
+
+    const music = document.getElementById("bgMusic");
+    const toggleBtn = document.getElementById("toggleMusic");
+
+    toggleBtn.addEventListener("click", () => {
+      if (music.paused) {
+        music.play();
+        toggleBtn.textContent = "⏸ Música";
+      } else {
+        music.pause();
+        toggleBtn.textContent = "▶ Música";
+      }
+    });
+  </script>
+</body>
+</html>
