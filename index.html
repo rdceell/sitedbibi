@@ -3,153 +3,86 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Saudades de Você</title>
+  <title>Para o amor da minha vida ❤️</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body, html {
       height: 100%;
       font-family: 'Segoe UI', sans-serif;
       overflow: hidden;
-      background-color: black;
     }
-
     .background {
       position: fixed;
       top: 0;
       left: 0;
-      height: 100%;
       width: 100%;
+      height: 100%;
       z-index: -1;
+      animation: fade 15s infinite;
       background-size: cover;
       background-position: center;
-      filter: blur(12px) brightness(0.6);
-      transition: background-image 2s ease-in-out;
+      filter: blur(6px) brightness(0.7);
     }
-
-    .content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #fff;
+    @keyframes fade {
+      0%   { background-image: url('img/bg1.JPG'); }
+      33%  { background-image: url('img/bg2.JPG'); }
+      66%  { background-image: url('img/bg3.JPG'); }
+      100% { background-image: url('img/bg1.JPG'); }
+    }
+    .container {
       text-align: center;
-      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
       padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      position: relative;
+      z-index: 1;
     }
-
-    .content h1 {
+    .container h1 {
       font-size: 2.5em;
-      margin-bottom: 30px;
-      animation: fadeIn 2s ease-in-out;
+      margin-bottom: 20px;
     }
-
     .photos {
       display: flex;
       justify-content: center;
-      gap: 25px;
-      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 30px;
     }
-
     .photos img {
-      width: 160px;
-      height: 160px;
+      width: 220px;
+      height: 220px;
       object-fit: cover;
       border-radius: 20px;
       border: 3px solid white;
-      transition: transform 0.4s ease;
+      box-shadow: 0 0 10px rgba(255,255,255,0.4);
+      transition: transform 0.3s ease;
     }
-
     .photos img:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
-
-    button#toggleMusic {
-      padding: 10px 20px;
-      font-size: 1em;
-      border: none;
-      background: #ff7f7f;
-      color: white;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    button#toggleMusic:hover {
-      background: #ff5252;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translate(-50%, -60%); }
-      to { opacity: 1; transform: translate(-50%, -50%); }
-    }
-
-    @media (max-width: 768px) {
-      .photos {
-        flex-direction: column;
-      }
-
-      .photos img {
-        width: 100px;
-        height: 100px;
-      }
+    audio {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <div class="background" id="background"></div>
+  <div class="background"></div>
 
-  <div class="content">
-    <h1>Saudades de Você bibi ❤️</h1>
+  <div class="container">
+    <h1>Saudades de você, meu amor 💌</h1>
     <div class="photos">
-      <img src="img/foto1.jpg" alt="Foto 1" />
-      <img src="img/foto2.jpg" alt="Foto 2" />
-      <img src="img/foto3.jpg" alt="Foto 3" />
+      <img src="img/foto1.JPG" alt="Foto 1">
+      <img src="img/foto2.JPG" alt="Foto 2">
+      <img src="img/foto3.JPG" alt="Foto 3">
     </div>
-    <button id="toggleMusic">⏸ Música</button>
   </div>
 
-  <audio id="bgMusic" autoplay loop>
+  <audio autoplay loop>
     <source src="music/musica.mp3" type="audio/mpeg">
     Seu navegador não suporta áudio.
   </audio>
-
-  <script>
-    const backgrounds = [
-      'img/bg1.jpg',
-      'img/bg2.jpg',
-      'img/bg3.jpg'
-    ];
-
-    let current = 0;
-    const bg = document.getElementById('background');
-
-    function changeBackground() {
-      current = (current + 1) % backgrounds.length;
-      bg.style.backgroundImage = `url('${backgrounds[current]}')`;
-    }
-
-    bg.style.backgroundImage = `url('${backgrounds[current]}')`;
-    setInterval(changeBackground, 7000);
-
-    const music = document.getElementById("bgMusic");
-    const toggleBtn = document.getElementById("toggleMusic");
-
-    toggleBtn.addEventListener("click", () => {
-      if (music.paused) {
-        music.play();
-        toggleBtn.textContent = "⏸ Música";
-      } else {
-        music.pause();
-        toggleBtn.textContent = "▶ Música";
-      }
-    });
-  </script>
 </body>
 </html>
